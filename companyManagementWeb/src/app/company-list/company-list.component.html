@@ -1,0 +1,63 @@
+<div class="container-custom my-3">
+  <h1>Company Overview</h1>
+
+  <ag-grid-angular
+  style="height: 550px;"
+  class="ag-theme-material"
+  [rowData]="rowData"
+  [columnDefs]="colDefs"
+  (gridReady)="onGridReady($event)"
+  [pagination]="true"
+  [paginationPageSize] = 5
+  [paginationPageSizeSelector]="[5,10,20]"
+  [autoSizeStrategy]="autoSizeStrategy"
+>
+</ag-grid-angular>
+
+  <!-- <table class="table my-3">
+    <thead>
+      <tr>
+        <th scope="col">Company no.</th>
+        <th scope="col">Company name</th>
+        <th scope="col">Industry</th>
+        <th scope="col">Number of employees</th>
+        <th scope="col">City</th>
+        <th scope="col">Parent company</th>
+        <th scope="col">Level</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      @for(company of companies;track company){
+      <tr>
+        <td>{{ company.id }}</td>
+        <td>{{ company.name }}</td>
+        <td>{{ company.industry }}</td>
+        <td>{{ company.numberOfEmployees }}</td>
+        <td>{{ company.city }}</td>
+        <td>
+          @if(company.parentCompany){
+            {{company.parentCompany.name}}
+          }      
+        </td>        
+        <td>{{ company.level }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            [routerLink]="['/company/edit', company.id]"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+      } @empty {
+      <td>No record found</td>
+      }
+    </tbody>
+  </table> -->
+
+  <div class="d-grid d-md-flex justify-content-md-end">
+    <button class="btn btn-primary" (click)="openCreateModal()">New Company</button>
+  </div>
+</div>

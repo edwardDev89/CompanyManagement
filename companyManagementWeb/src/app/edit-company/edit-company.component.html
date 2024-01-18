@@ -1,0 +1,145 @@
+<div class="container my-3">
+  <h1>Edit Company</h1>
+  <div class="row">
+    <div class="my-2">
+      <form [formGroup]="editCompanyForm" (ngSubmit)="editCompany()">
+        <div class="mb-3">
+          <label class="form-label">ID</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="id"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            maxlength="50"
+            formControlName="name"
+            [ngClass]="{
+              'is-invalid':
+              editCompanyForm.get('name')?.invalid &&
+                (editCompanyForm.get('name')?.touched || formSubmitted)
+            }"
+          />
+          @if(editCompanyForm.get('name')?.hasError('required') &&
+          (editCompanyForm.get('name')?.touched || formSubmitted)){
+          <span class="text-danger"> Name is required. </span>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Company Industry</label>
+          <select
+            class="form-select"
+            id="industry"
+            formControlName="industry"
+            [ngClass]="{
+              'is-invalid':
+              editCompanyForm.get('industry')?.invalid &&
+                (editCompanyForm.get('industry')?.touched || formSubmitted)
+            }"
+          >
+            <option value="">Please Select</option>
+            <option value="Meat processing">Meat processing</option>
+            <option value="Gardening and landscaping">
+              Gardening and landscaping
+            </option>
+            <option value="IT services">IT services</option>
+            <option value="Aerospace technology">Aerospace technology</option>
+            <option value="Consumer electronics">Consumer electronics</option>
+          </select>
+          @if(editCompanyForm.get('industry')?.hasError('required') &&
+          (editCompanyForm.get('industry')?.touched || formSubmitted)){
+          <span class="text-danger"> Industry is required. </span>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            maxlength="50"
+            formControlName="city"
+            [ngClass]="{
+              'is-invalid':
+              editCompanyForm.get('city')?.invalid &&
+                (editCompanyForm.get('city')?.touched || formSubmitted)
+            }"
+          />
+          @if(editCompanyForm.get('city')?.hasError('required') &&
+          (editCompanyForm.get('city')?.touched || formSubmitted)){
+          <span class="text-danger"> City is required. </span>
+          }@else if ( editCompanyForm.get('city')?.hasError('pattern')) {<span
+            class="text-danger"
+          >
+            Alphabetic characters and hyphens only. </span
+          >}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Number of Employees</label>
+          <input
+            type="number"
+            class="form-control"
+            id="numberOfEmployees"
+            formControlName="numberOfEmployees"
+            [ngClass]="{
+              'is-invalid':
+              editCompanyForm.get('numberOfEmployees')?.invalid &&
+                (editCompanyForm.get('numberOfEmployees')?.touched || formSubmitted)
+            }"
+          />
+          @if((editCompanyForm.get('numberOfEmployees')?.hasError('required') ||
+          editCompanyForm.get('numberOfEmployees')?.hasError('min') ||
+          editCompanyForm.get('numberOfEmployees')?.hasError('max') ||
+          editCompanyForm.get('numberOfEmployees')?.hasError('pattern')) &&
+          (editCompanyForm.get('numberOfEmployees')?.touched || formSubmitted)){
+          <span class="text-danger">
+            Please enter valid number and range between 1 to 1000000
+          </span>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Parent Company</label>
+          <select
+            class="form-select"
+            id="parentCompanyId"
+            formControlName="parentCompanyId"
+          >
+            <option selected value="">None</option>
+            @for(company of companies;track company){
+            <option value="{{ company.id }}">{{ company.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button
+            type="button"
+            (click)="deleteCompany()"
+            class="btn btn-danger"
+          >
+            Delete Company
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!editCompanyForm.valid"
+          >
+            Update Company
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

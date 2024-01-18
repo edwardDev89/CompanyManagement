@@ -1,0 +1,54 @@
+<div class="container my-3">
+  <div class="col-6 my-2">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" class="my-3" (ngSubmit)="login()">
+      <div class="mb-3">
+        <label for="email" class="form-label">email</label>
+        <input
+          type="text"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          [ngClass]="{
+            'is-invalid':
+              loginForm.get('email')?.invalid &&
+              (loginForm.get('email')?.touched || formSubmitted)
+          }"
+        />
+        @if(loginForm.get('email')?.hasError('required') &&
+        (loginForm.get('email')?.touched || formSubmitted)){
+        <span class="text-danger"> Email is required. </span>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          [ngClass]="{
+            'is-invalid':
+              loginForm.get('password')?.invalid &&
+              (loginForm.get('password')?.touched || formSubmitted)
+          }"
+        />
+        @if(loginForm.get('password')?.hasError('required') &&
+        (loginForm.get('password')?.touched || formSubmitted)){
+        <span class="text-danger"> Password is required. </span>
+        }
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="submit" class="btn btn-primary">Login</button>
+        <button
+          type="button"
+          class="btn btn-success"
+          [routerLink]="['/register']"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

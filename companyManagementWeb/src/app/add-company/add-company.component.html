@@ -1,0 +1,122 @@
+<div class="container-fluid justify-content-center my-3">
+  <h1>Add Company</h1>
+  <div class="row">
+    <div class="my-2">
+      <form [formGroup]="companyForm" (ngSubmit)="addCompany()">
+        <div class="mb-3">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            maxlength="50"
+            formControlName="name"
+            [ngClass]="{
+              'is-invalid':
+                companyForm.get('name')?.invalid &&
+                (companyForm.get('name')?.touched || formSubmitted)
+            }"
+          />
+          @if(companyForm.get('name')?.hasError('required') &&
+          (companyForm.get('name')?.touched || formSubmitted)){
+          <span class="text-danger"> Name is required. </span>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Company Industry</label>
+          <select
+            class="form-select"
+            id="industry"
+            formControlName="industry"
+            [ngClass]="{
+              'is-invalid':
+                companyForm.get('industry')?.invalid &&
+                (companyForm.get('industry')?.touched || formSubmitted)
+            }"
+          >
+            <option value="">Please Select</option>
+            <option value="Meat processing">Meat processing</option>
+            <option value="Gardening and landscaping">
+              Gardening and landscaping
+            </option>
+            <option value="IT services">IT services</option>
+            <option value="Aerospace technology">Aerospace technology</option>
+            <option value="Consumer electronics">Consumer electronics</option>
+          </select>
+          @if(companyForm.get('industry')?.hasError('required') &&
+          (companyForm.get('industry')?.touched || formSubmitted)){
+          <span class="text-danger"> Industry is required. </span>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">City</label>
+          <input
+            type="text"
+            class="form-control"
+            id="city"
+            maxlength="50"
+            formControlName="city"
+            [ngClass]="{
+              'is-invalid':
+                companyForm.get('city')?.invalid &&
+                (companyForm.get('city')?.touched || formSubmitted)
+            }"
+          />
+          @if(companyForm.get('city')?.hasError('required') &&
+          (companyForm.get('city')?.touched || formSubmitted)){
+          <span class="text-danger"> City is required. </span>
+          }@else if ( companyForm.get('city')?.hasError('pattern')) {<span
+            class="text-danger"
+          >
+            Alphabetic characters and hyphens only. </span
+          >}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Number of Employees</label>
+          <input
+            type="number"
+            class="form-control"
+            id="numberOfEmployees"
+            formControlName="numberOfEmployees"
+            [ngClass]="{
+              'is-invalid':
+                companyForm.get('numberOfEmployees')?.invalid &&
+                (companyForm.get('numberOfEmployees')?.touched || formSubmitted)
+            }"
+          />
+          @if((companyForm.get('numberOfEmployees')?.hasError('required') ||
+          companyForm.get('numberOfEmployees')?.hasError('min') ||
+          companyForm.get('numberOfEmployees')?.hasError('max') ||
+          companyForm.get('numberOfEmployees')?.hasError('pattern')) &&
+          (companyForm.get('numberOfEmployees')?.touched || formSubmitted)){
+          <span class="text-danger">
+            Please enter valid number and range between 1 to 1000000
+          </span>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Parent Company</label>
+          <select
+            class="form-select"
+            id="parentCompanyId"
+            formControlName="parentCompanyId"
+          >
+            <option value=null>None</option>
+            @for(company of companies;track company){
+            <option value="{{ company.id }}">{{ company.name }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button type="submit" class="btn btn-primary me-md-2">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- [disabled]="!companyForm.valid" -->
