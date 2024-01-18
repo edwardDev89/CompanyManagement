@@ -10,8 +10,8 @@ Backend : .NET8 web api & MSSQL
 - EF core 8 to create the db by code ( add-migration + update db )
 
 Pre-requisite for run the project
-Database: Install localDb & sql management studio, then create a dbname, 
-Backend: Change the dbname in appSetting.json , default is (localdb)\CompanyManagementDB 
-Frontend: run npm i to install the necessary package
+- Database: Install localDb & sql management studio, then create a dbname, 
+- Backend: Change the dbname in appSetting.json , default is (localdb)\CompanyManagementDB 
+- Frontend: run npm i to install the necessary package
 
 
