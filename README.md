@@ -1,4 +1,4 @@
-Project Info:
+##Project Info:
 
 Frontend:
 - By using Frontend Angular 17, all component is standalone and I tried involve signal function for this project.
@@ -10,5 +10,8 @@ Backend : .NET8 web api & MSSQL
 - EF core 8 to create the db by code ( add-migration + update db )
 
 Pre-requisite for run the project
-Install localDb with server (localdb)\CompanyManagementDB for login.
+Database: Install localDb & sql management studio, then create a dbname, 
+Backend: Change the dbname in appSetting.json , default is (localdb)\CompanyManagementDB 
+Frontend: run npm i to install the necessary package
+
 
